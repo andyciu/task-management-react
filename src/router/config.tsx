@@ -1,3 +1,4 @@
+import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import Bus from "../components/example/Bus";
 import Cart from "../components/example/Cart";
 import Count from "../components/example/Count";
@@ -9,39 +10,48 @@ export { PublicRouteConfig };
 export type { IRoute };
 
 interface IRoute {
-  Path: string;
-  Component: () => JSX.Element;
-  Routes?: IRoute[];
+  text: string;
+  path: string;
+  component: () => JSX.Element;
+  exact?: boolean;
+  icon?: IconDefinition;
+  routes?: IRoute[];
 }
 
 const PublicRouteConfig: IRoute[] = [
   {
-    Path: "/",
-    Component: Home,
-    Routes: [
+    text: "Home",
+    path: "/",
+    exact: true,
+    component: Sandwiches,
+  },
+  {
+    text: "Sandwiches",
+    path: "/sandwiches",
+    component: Sandwiches,
+  },
+  {
+    text: "Tacos",
+    path: "/tacos",
+    exact: true,
+    component: Tacos,
+    routes: [
       {
-        Path: "/sandwiches",
-        Component: Sandwiches,
-      },
-      {
-        Path: "/tacos",
-        Component: Tacos,
-        Routes: [
+        text: "Bus",
+        path: "/tacos/bus",
+        component: Bus,
+        routes: [
           {
-            Path: "/tacos/bus",
-            Component: Bus,
-            Routes: [
-              {
-                Path: "/tacos/bus/count",
-                Component: Count,
-              },
-            ],
-          },
-          {
-            Path: "/tacos/cart",
-            Component: Cart,
+            text: "Count",
+            path: "/tacos/bus/count",
+            component: Count,
           },
         ],
+      },
+      {
+        text: "Cart",
+        path: "/tacos/cart",
+        component: Cart,
       },
     ],
   },
