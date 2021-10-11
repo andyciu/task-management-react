@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
-import Content from "../components/content/Content";
-import SideBar from "../components/sidebar/SideBar";
+import Content from "./content/Content";
+import SideBar from "./sidebar/SideBar";
 import "./MainPage.css";
 
 const MainPage = () => {

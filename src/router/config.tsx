@@ -5,8 +5,10 @@ import Count from "../components/example/Count";
 import Home from "../components/example/Home";
 import Sandwiches from "../components/example/Sandwiches";
 import Tacos from "../components/example/Tacos";
+import LabelsPage from "../pages/labels/labels";
+import TasksPage from "../pages/tasks/tasks";
 
-export { PublicRouteConfig };
+export { PrivateRouteConfig as PublicRouteConfig };
 export type { IRoute };
 
 interface IRoute {
@@ -18,7 +20,7 @@ interface IRoute {
   routes?: IRoute[];
 }
 
-const PublicRouteConfig: IRoute[] = [
+const PrivateRouteConfig: IRoute[] = [
   {
     text: "Home",
     path: "/",
@@ -26,9 +28,14 @@ const PublicRouteConfig: IRoute[] = [
     component: Sandwiches,
   },
   {
-    text: "Sandwiches",
-    path: "/sandwiches",
-    component: Sandwiches,
+    text: "Tasks",
+    path: "/tasks",
+    component: TasksPage,
+  },
+  {
+    text: "Labels",
+    path: "/labels",
+    component: LabelsPage,
   },
   {
     text: "Tacos",
@@ -40,18 +47,16 @@ const PublicRouteConfig: IRoute[] = [
         text: "Bus",
         path: "/tacos/bus",
         component: Bus,
-        routes: [
-          {
-            text: "Count",
-            path: "/tacos/bus/count",
-            component: Count,
-          },
-        ],
       },
       {
         text: "Cart",
         path: "/tacos/cart",
         component: Cart,
+      },
+      {
+        text: "Count",
+        path: "/tacos/count",
+        component: Count,
       },
     ],
   },

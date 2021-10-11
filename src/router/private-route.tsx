@@ -3,20 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { Nav } from "react-bootstrap";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import SubMenu from "../components/sidebar/SubMenu";
+import SubMenu from "../layout/sidebar/SubMenu";
 import { IRoute, PublicRouteConfig } from "./config";
-
-export default function RouteConfig() {
-  return (
-    <Router>
-      <Switch>
-        {PublicRouteConfig.map((config, i) => {
-          return RouteCompoment(config);
-        })}
-      </Switch>
-    </Router>
-  );
-}
 
 const RouteCompoment = (props: IRoute) => {
   return (
@@ -31,8 +19,13 @@ const RouteCompoment = (props: IRoute) => {
 
 const NavLinkCompoment = (props: IRoute) => {
   return (
-    <Nav.Item>
-      <Nav.Link href={props.path} className="sidebar-link">
+    <Nav.Item key={"item" + props.path}>
+      <Nav.Link
+        as={Link}
+        to={props.path}
+        key={"link" + props.path}
+        className="sidebar-link"
+      >
         {props.icon ? (
           <FontAwesomeIcon icon={props.icon} className="mr-2" />
         ) : null}
@@ -48,6 +41,7 @@ const SubMenuCompoment = (props: IRoute) => {
       title={props.text}
       icon={props.icon ?? faCopy}
       items={props.routes!}
+      key={"submenu" + props.text}
     />
   );
 };

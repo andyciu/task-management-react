@@ -10,7 +10,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames";
 import { Button, Nav } from "react-bootstrap";
-import { RouteSideBar } from "../../router/public-route";
+import { RouteSideBar } from "../../router/private-route";
 import SubMenu from "./SubMenu";
 
 interface IProps {

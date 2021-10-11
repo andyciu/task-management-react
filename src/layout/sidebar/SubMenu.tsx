@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames";
 import React, { Children, useState } from "react";
 import { Accordion, Card, Nav, useAccordionButton } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import { StringDecoder } from "string_decoder";
 import { IRoute } from "../../router/config";
 
@@ -28,22 +29,25 @@ const SubMenu = (props: IProps) => {
     eventKey: string;
     onclick?: Function;
     children?: React.ReactNode;
+    keystr: string;
   }
 
   const CustomToggle: React.FC<ICustomToggleProps> = (
     props: ICustomToggleProps
   ) => {
-    const { eventKey, onclick, children } = props;
+    const { eventKey, onclick, children, keystr } = props;
     const decoratedOnClick = useAccordionButton(eventKey, () => {
-      console.log("totally custom!");
-
       if (onclick) {
         onclick();
       }
     });
 
     return (
-      <Nav.Link className="sidebar-link" onClick={decoratedOnClick}>
+      <Nav.Link
+        className="sidebar-link"
+        key={"link" + keystr}
+        onClick={decoratedOnClick}
+      >
         {children}
       </Nav.Link>
     );
@@ -52,7 +56,7 @@ const SubMenu = (props: IProps) => {
   return (
     <Nav.Item className={classNames({ open: !collapsed })}>
       <Accordion>
-        <CustomToggle eventKey="0" onclick={toggleNavbar}>
+        <CustomToggle eventKey="0" keystr={title} onclick={toggleNavbar}>
           <FontAwesomeIcon icon={icon} className="mr-2" />
           &nbsp;{title}&nbsp;
           <FontAwesomeIcon
@@ -64,15 +68,14 @@ const SubMenu = (props: IProps) => {
         <Accordion.Collapse eventKey="0">
           <nav className="nav flex-column">
             {items.map((item) => (
-              <a
-                className={`nav-link nav-item pl-5 sidebar-link ${
-                  item.text === "Active" ? "active" : ""
-                } `}
-                href={item.path}
+              <Nav.Link
+                as={Link}
+                to={item.path}
                 key={item.path}
+                className="sidebar-link"
               >
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{item.text}
-              </a>
+              </Nav.Link>
             ))}
           </nav>
         </Accordion.Collapse>

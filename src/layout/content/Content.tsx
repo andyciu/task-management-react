@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import { Col, Container, Row } from "react-bootstrap";
-import { RouteContent } from "../../router/public-route";
+import { RouteContent } from "../../router/private-route";
 import NavbarCustom from "./Navbar";
 
 interface IProps {
@@ -17,9 +17,7 @@ const Content = (props: IProps) => {
           <NavbarCustom toggle={toggle} />
         </Col>
       </Row>
-      <Row>
-        <RouteContent />
-      </Row>
+      <RouteContent />
     </Container>
   );
 };
