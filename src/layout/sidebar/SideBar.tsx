@@ -31,11 +31,11 @@ const SideBar = (props: IProps) => {
         >
           <FontAwesomeIcon icon={faTimes} pull="right" size="xs" />
         </Button>
-        <h3>react-bootstrap sidebar</h3>
+        <h3>Task Management</h3>
       </div>
 
       <Nav className="flex-column pt-2">
-        <p className="ml-3">Heading</p>
+        {/* <p className="ml-3">Heading</p> */}
 
         <RouteSideBar />
       </Nav>

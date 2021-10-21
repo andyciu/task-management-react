@@ -6,7 +6,7 @@ import Home from "../components/example/Home";
 import Sandwiches from "../components/example/Sandwiches";
 import Tacos from "../components/example/Tacos";
 import LabelsPage from "../pages/labels/LabelsPage";
-import TasksPage from "../pages/tasks/tasks";
+import TasksPage from "../pages/tasks/TasksPage";
 
 export { PrivateRouteConfig as PublicRouteConfig };
 export type { IRoute };

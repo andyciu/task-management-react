@@ -78,10 +78,10 @@ const LabelsPage = () => {
               onFinish={(result) => {
                 setShowAlert(false);
                 if (result.code == "00") {
-                  setAlertVariant("danger");
+                  setAlertVariant("success");
                   setAlertText("刪除成功");
                 } else {
-                  setAlertVariant("dark");
+                  setAlertVariant("danger");
                   setAlertText("刪除失敗");
                 }
                 setShowAlert(true);
