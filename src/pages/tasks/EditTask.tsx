@@ -1,21 +1,23 @@
 import { useEffect, useState } from "react";
 import { Button, Col, Form, Offcanvas, Spinner } from "react-bootstrap";
 import Select from "react-select";
-import { ApiTasksCreate } from "../../apis/tasks";
+import { ApiTasksEdit } from "../../apis/tasks";
 import { CommonRes } from "../../interface/common";
 import { LabelsListRes } from "../../interface/labels";
-import { TasksCreateReq } from "../../interface/tasks";
+import { TasksEditReq, TasksListRes } from "../../interface/tasks";
 import { useAppDispatch, useAppSelector } from "../../store/hook";
 import { InitLabelsSliceData } from "../../store/labels/labelsSlice";
+import { toDateString } from "../../utils/dateFormat";
 
 interface IProp {
   onFinish?: (value: CommonRes<any>) => void;
+  data: TasksListRes;
 }
 
 const EditTask = (props: IProp) => {
   const dispatch = useAppDispatch();
   const labelsData = useAppSelector((state) => state.labels.value);
-  const { onFinish } = props;
+  const { onFinish, data } = props;
   const [show, setShow] = useState(false);
   const [isClick, setIsClick] = useState(false);
   const [validated, setValidated] = useState(false);
@@ -39,7 +41,9 @@ const EditTask = (props: IProp) => {
     const formData = new FormData(e.target),
       formDataObj = Object.fromEntries(formData.entries());
 
-    const reqData = formDataObj as unknown as TasksCreateReq;
+    const reqData = formDataObj as unknown as TasksEditReq;
+
+    reqData.id = data.id;
     reqData.start_time = reqData.start_time
       ? new Date(reqData.start_time).toISOString()
       : undefined;
@@ -71,9 +75,9 @@ const EditTask = (props: IProp) => {
         ? reqData.state
         : undefined;
 
-    console.log(reqData);
+    // console.log(reqData);
     // console.log(labelsValue);
-    const result = await ApiTasksCreate(reqData);
+    const result = await ApiTasksEdit(reqData);
     setShow(false);
     if (onFinish) {
       onFinish(result);
@@ -96,12 +100,12 @@ const EditTask = (props: IProp) => {
           setShow(true);
         }}
       >
-        Create
+        Edit
       </Button>
 
       <Offcanvas show={show} onHide={() => setShow(false)} placement="end">
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Create Task</Offcanvas.Title>
+          <Offcanvas.Title>Edit Task</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
           <Form onSubmit={onSummit} noValidate validated={validated}>
@@ -111,6 +115,7 @@ const EditTask = (props: IProp) => {
                 type="text"
                 placeholder="Title"
                 name="title"
+                defaultValue={data.title}
                 required
               />
               <Form.Control.Feedback type="invalid">
@@ -123,6 +128,7 @@ const EditTask = (props: IProp) => {
                 type="text"
                 placeholder="Description"
                 name="description"
+                defaultValue={data.description}
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="start_time">
@@ -131,6 +137,7 @@ const EditTask = (props: IProp) => {
                 type="date"
                 placeholder="StartTime"
                 name="start_time"
+                defaultValue={toDateString(data.start_time ?? "")}
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="end_time">
@@ -139,8 +146,8 @@ const EditTask = (props: IProp) => {
                 type="date"
                 placeholder="EndTime"
                 name="end_time"
-                isValid={false}
                 isInvalid={endtimeisInvalid}
+                defaultValue={toDateString(data.end_time ?? "")}
               />
               <Form.Control.Feedback type="invalid">
                 End Time is Invalid
@@ -148,7 +155,11 @@ const EditTask = (props: IProp) => {
             </Form.Group>
             <Form.Group className="mb-3" controlId="priority">
               <Form.Label>Priority</Form.Label>
-              <Form.Select aria-label="priority" name="priority">
+              <Form.Select
+                aria-label="priority"
+                name="priority"
+                defaultValue={data.priority}
+              >
                 <option value="">請選擇...</option>
                 <option value="1">低</option>
                 <option value="2">中</option>
@@ -157,7 +168,11 @@ const EditTask = (props: IProp) => {
             </Form.Group>
             <Form.Group className="mb-3" controlId="state">
               <Form.Label>State</Form.Label>
-              <Form.Select aria-label="state" name="state">
+              <Form.Select
+                aria-label="state"
+                name="state"
+                defaultValue={data.state}
+              >
                 <option value="">請選擇...</option>
                 <option value="1">待處理</option>
                 <option value="2">處理中</option>
@@ -176,6 +191,18 @@ const EditTask = (props: IProp) => {
                   const newData = Object.assign([], value);
                   setLabelsValue(newData);
                 }}
+                defaultValue={(() => {
+                  const value: LabelsListRes[] = [];
+                  data.labels?.forEach((k) => {
+                    const result = labelsData.find(
+                      (element) => element.id == k
+                    );
+                    if (result) {
+                      value.push(result);
+                    }
+                  });
+                  return value;
+                })()}
               />
             </Form.Group>
             <br />

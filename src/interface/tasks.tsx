@@ -14,15 +14,26 @@ interface TasksCreateReq {
   labels?: number[];
 }
 
-interface TasksListRes {
+interface TasksEditReq {
   id: number;
   title: string;
   description?: string;
-  start_time?: Date;
-  end_time?: Date;
+  start_time?: string;
+  end_time?: string;
   priority?: number;
   state?: number;
   labels?: number[];
 }
 
-export type { TasksListReq, TasksCreateReq, TasksListRes };
+interface TasksListRes {
+  id: number;
+  title: string;
+  description?: string;
+  start_time?: string;
+  end_time?: string;
+  priority?: number;
+  state?: number;
+  labels?: number[];
+}
+
+export type { TasksListReq, TasksCreateReq, TasksEditReq, TasksListRes };

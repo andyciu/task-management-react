@@ -141,7 +141,6 @@ const CreateTask = (props: IProp) => {
                 type="date"
                 placeholder="EndTime"
                 name="end_time"
-                isValid={false}
                 isInvalid={endtimeisInvalid}
               />
               <Form.Control.Feedback type="invalid">

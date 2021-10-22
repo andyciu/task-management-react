@@ -12,6 +12,7 @@ import { useAppDispatch, useAppSelector } from "../../store/hook";
 import { InitLabelsSliceData } from "../../store/labels/labelsSlice";
 import { toDateString } from "../../utils/dateFormat";
 import CreateTask from "./CreateTask";
+import EditTask from "./EditTask";
 
 const TasksPage = () => {
   const dispatch = useAppDispatch();
@@ -165,51 +166,51 @@ const TasksPage = () => {
         ));
       },
     },
-    // {
-    //   dataField: "_action",
-    //   text: "Action",
-    //   style: { width: "12%" },
-    //   align: "center",
-    //   formatter: (cell, row, rowIndex) => {
-    //     return (
-    //       <>
-    //         <EditLabel
-    //           onFinish={(result) => {
-    //             setShowAlert(false);
-    //             if (result.code == "00") {
-    //               setAlertVariant("success");
-    //               setAlertText("修改成功");
-    //             } else {
-    //               setAlertVariant("danger");
-    //               setAlertText("修改失敗");
-    //             }
-    //             setShowAlert(true);
-    //             setDataSourse([]);
-    //             GetLabelsList();
-    //           }}
-    //           {...row}
-    //         />
-    //         &nbsp;
-    //         <DeleteLabel
-    //           id={row.id}
-    //           onFinish={(result) => {
-    //             setShowAlert(false);
-    //             if (result.code == "00") {
-    //               setAlertVariant("danger");
-    //               setAlertText("刪除成功");
-    //             } else {
-    //               setAlertVariant("dark");
-    //               setAlertText("刪除失敗");
-    //             }
-    //             setShowAlert(true);
-    //             setDataSourse([]);
-    //             GetLabelsList();
-    //           }}
-    //         />
-    //       </>
-    //     );
-    //   },
-    // },
+    {
+      dataField: "_action",
+      text: "Action",
+      style: { width: "12%" },
+      align: "center",
+      formatter: (cell, row, rowIndex) => {
+        return (
+          <>
+            <EditTask
+              onFinish={(result) => {
+                setShowAlert(false);
+                if (result.code == "00") {
+                  setAlertVariant("success");
+                  setAlertText("修改成功");
+                } else {
+                  setAlertVariant("danger");
+                  setAlertText("修改失敗");
+                }
+                setShowAlert(true);
+                setDataSourse([]);
+                GetTasksList();
+              }}
+              data={row}
+            />
+            {/* &nbsp;
+            <DeleteLabel
+              id={row.id}
+              onFinish={(result) => {
+                setShowAlert(false);
+                if (result.code == "00") {
+                  setAlertVariant("danger");
+                  setAlertText("刪除成功");
+                } else {
+                  setAlertVariant("dark");
+                  setAlertText("刪除失敗");
+                }
+                setShowAlert(true);
+                setDataSourse([]);
+                GetLabelsList();
+              }}
+            /> */}
+          </>
+        );
+      },
+    },
   ];
 
   const defaultSorted: [{ dataField: any; order: SortOrder }] = [
