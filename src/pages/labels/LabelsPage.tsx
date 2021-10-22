@@ -19,8 +19,11 @@ import paginationFactory from "react-bootstrap-table2-paginator";
 import EditLabel from "./EditLabel";
 import CustomSortCaret from "../../components/custom-sort-caret/CustomSortCaret";
 import DeleteLabel from "./DeleteLabel";
+import { useAppDispatch } from "../../store/hook";
+import { writeData } from "../../store/labels/labelsSlice";
 
 const LabelsPage = () => {
+  const dispatch = useAppDispatch();
   const [dataSourse, setDataSourse] = useState<LabelsListRes[]>([]);
   const [loading, setLoading] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
@@ -31,6 +34,7 @@ const LabelsPage = () => {
     setLoading(true);
     const data = await ApiLabelsList();
     setDataSourse(data.content);
+    dispatch(writeData(data.content));
     setLoading(false);
   };
 

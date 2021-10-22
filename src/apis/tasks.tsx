@@ -2,6 +2,7 @@ import { AxiosResponse } from "axios";
 import { CommonRes } from "../interface/common";
 import {
   TasksCreateReq,
+  TasksDeleteReq,
   TasksEditReq,
   TasksListReq,
   TasksListRes,
@@ -31,4 +32,12 @@ const ApiTasksEdit = async (value: TasksEditReq) => {
   return response.data;
 };
 
-export { ApiTasksList, ApiTasksCreate, ApiTasksEdit };
+const ApiTasksDelete = async (value: TasksDeleteReq) => {
+  const response = await http.post<
+    TasksDeleteReq,
+    AxiosResponse<CommonRes<null>>
+  >("/tasks/deleteL", value);
+  return response.data;
+};
+
+export { ApiTasksList, ApiTasksCreate, ApiTasksEdit, ApiTasksDelete };

@@ -25,6 +25,10 @@ interface TasksEditReq {
   labels?: number[];
 }
 
+interface TasksDeleteReq {
+  id: number;
+}
+
 interface TasksListRes {
   id: number;
   title: string;
@@ -36,4 +40,10 @@ interface TasksListRes {
   labels?: number[];
 }
 
-export type { TasksListReq, TasksCreateReq, TasksEditReq, TasksListRes };
+export type {
+  TasksListReq,
+  TasksCreateReq,
+  TasksEditReq,
+  TasksDeleteReq,
+  TasksListRes,
+};

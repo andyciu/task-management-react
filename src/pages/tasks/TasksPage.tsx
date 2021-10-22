@@ -12,6 +12,7 @@ import { useAppDispatch, useAppSelector } from "../../store/hook";
 import { InitLabelsSliceData } from "../../store/labels/labelsSlice";
 import { toDateString } from "../../utils/dateFormat";
 import CreateTask from "./CreateTask";
+import DeleteTask from "./DeleteTask";
 import EditTask from "./EditTask";
 
 const TasksPage = () => {
@@ -190,8 +191,8 @@ const TasksPage = () => {
               }}
               data={row}
             />
-            {/* &nbsp;
-            <DeleteLabel
+            &nbsp;
+            <DeleteTask
               id={row.id}
               onFinish={(result) => {
                 setShowAlert(false);
@@ -204,9 +205,9 @@ const TasksPage = () => {
                 }
                 setShowAlert(true);
                 setDataSourse([]);
-                GetLabelsList();
+                GetTasksList();
               }}
-            /> */}
+            />
           </>
         );
       },

@@ -37,27 +37,27 @@ const PrivateRouteConfig: IRoute[] = [
     path: "/labels",
     component: LabelsPage,
   },
-  {
-    text: "Tacos",
-    path: "/tacos",
-    exact: true,
-    component: Tacos,
-    routes: [
-      {
-        text: "Bus",
-        path: "/tacos/bus",
-        component: Bus,
-      },
-      {
-        text: "Cart",
-        path: "/tacos/cart",
-        component: Cart,
-      },
-      {
-        text: "Count",
-        path: "/tacos/count",
-        component: Count,
-      },
-    ],
-  },
+  // {
+  //   text: "Tacos",
+  //   path: "/tacos",
+  //   exact: true,
+  //   component: Tacos,
+  //   routes: [
+  //     {
+  //       text: "Bus",
+  //       path: "/tacos/bus",
+  //       component: Bus,
+  //     },
+  //     {
+  //       text: "Cart",
+  //       path: "/tacos/cart",
+  //       component: Cart,
+  //     },
+  //     {
+  //       text: "Count",
+  //       path: "/tacos/count",
+  //       component: Count,
+  //     },
+  //   ],
+  // },
 ];
