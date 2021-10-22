@@ -22,7 +22,7 @@ interface TasksListRes {
   end_time?: Date;
   priority?: number;
   state?: number;
-  labels?: string[];
+  labels?: number[];
 }
 
 export type { TasksListReq, TasksCreateReq, TasksListRes };

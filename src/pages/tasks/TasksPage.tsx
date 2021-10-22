@@ -8,10 +8,14 @@ import paginationFactory from "react-bootstrap-table2-paginator";
 import { ApiTasksList } from "../../apis/tasks";
 import CustomSortCaret from "../../components/custom-sort-caret/CustomSortCaret";
 import { TasksListRes } from "../../interface/tasks";
+import { useAppDispatch, useAppSelector } from "../../store/hook";
+import { InitLabelsSliceData } from "../../store/labels/labelsSlice";
 import { toDateString } from "../../utils/dateFormat";
 import CreateTask from "./CreateTask";
 
 const TasksPage = () => {
+  const dispatch = useAppDispatch();
+  const labelsData = useAppSelector((state) => state.labels.value);
   const [dataSourse, setDataSourse] = useState<TasksListRes[]>([]);
   const [loading, setLoading] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
@@ -146,7 +150,15 @@ const TasksPage = () => {
         return cell?.map((value: any, i: number) => (
           <a key={`badge-${row.id}-${i}`}>
             <Badge pill bg="primary">
-              {value}
+              {(() => {
+                let name = "";
+                labelsData.forEach((k) => {
+                  if (k.id === value) {
+                    name = k.name;
+                  }
+                });
+                return name;
+              })()}
             </Badge>
             &nbsp;
           </a>
@@ -209,6 +221,10 @@ const TasksPage = () => {
 
   useEffect(() => {
     GetTasksList();
+
+    if (labelsData.length === 0) {
+      InitLabelsSliceData(dispatch);
+    }
   }, []);
 
   return (

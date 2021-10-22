@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { Button, Col, Form, Offcanvas, Spinner } from "react-bootstrap";
 import Select from "react-select";
-import AsyncSelect from "react-select/async";
-import { ApiLabelsList } from "../../apis/labels";
 import { ApiTasksCreate } from "../../apis/tasks";
 import { CommonRes } from "../../interface/common";
 import { LabelsListRes } from "../../interface/labels";
@@ -14,7 +12,7 @@ interface IProp {
   onFinish?: (value: CommonRes<any>) => void;
 }
 
-const CreateTask = (props: IProp) => {
+const EditTask = (props: IProp) => {
   const dispatch = useAppDispatch();
   const labelsData = useAppSelector((state) => state.labels.value);
   const { onFinish } = props;
@@ -204,4 +202,4 @@ const CreateTask = (props: IProp) => {
   );
 };
 
-export default CreateTask;
+export default EditTask;
