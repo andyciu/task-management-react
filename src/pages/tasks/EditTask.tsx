@@ -84,10 +84,22 @@ const EditTask = (props: IProp) => {
     }
   };
 
+  const InitLabelsData = () => {
+    const value: LabelsListRes[] = [];
+    data.labels?.forEach((k) => {
+      const result = labelsData.find((element) => element.id == k);
+      if (result) {
+        value.push(result);
+      }
+    });
+    return value;
+  };
+
   useEffect(() => {
     if (labelsData.length === 0) {
       InitLabelsSliceData(dispatch);
     }
+    setLabelsValue(InitLabelsData());
   }, []);
 
   return (
@@ -191,18 +203,7 @@ const EditTask = (props: IProp) => {
                   const newData = Object.assign([], value);
                   setLabelsValue(newData);
                 }}
-                defaultValue={(() => {
-                  const value: LabelsListRes[] = [];
-                  data.labels?.forEach((k) => {
-                    const result = labelsData.find(
-                      (element) => element.id == k
-                    );
-                    if (result) {
-                      value.push(result);
-                    }
-                  });
-                  return value;
-                })()}
+                defaultValue={InitLabelsData()}
               />
             </Form.Group>
             <br />
