@@ -20,7 +20,7 @@ const NavbarCustom = (props: IProps) => {
         </Button>
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-      <Navbar.Collapse
+      {/* <Navbar.Collapse
         id="responsive-navbar-nav"
         className="justify-content-end"
       >
@@ -30,7 +30,7 @@ const NavbarCustom = (props: IProps) => {
           <Nav.Link href="#">page</Nav.Link>
           <Nav.Link href="#">page</Nav.Link>
         </Nav>
-      </Navbar.Collapse>
+      </Navbar.Collapse> */}
     </Navbar>
   );
 };

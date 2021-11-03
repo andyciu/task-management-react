@@ -1,10 +1,5 @@
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
-import Bus from "../components/example/Bus";
-import Cart from "../components/example/Cart";
-import Count from "../components/example/Count";
-import Home from "../components/example/Home";
-import Sandwiches from "../components/example/Sandwiches";
-import Tacos from "../components/example/Tacos";
+import HomePage from "../pages/home/HomePage";
 import LabelsPage from "../pages/labels/LabelsPage";
 import TasksPage from "../pages/tasks/TasksPage";
 
@@ -25,7 +20,7 @@ const PrivateRouteConfig: IRoute[] = [
     text: "Home",
     path: "/",
     exact: true,
-    component: Sandwiches,
+    component: HomePage,
   },
   {
     text: "Tasks",
