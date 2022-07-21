@@ -1,7 +1,15 @@
 import axios from "axios";
 
-export default axios.create({
-  baseURL: process.env.REACT_APP_APIURL,
+export default () => axios.create({
+  baseURL: process.env.REACT_APP_URL + "/apis",
+  headers: {
+    "Content-type": "application/json",
+    Authorization: `Bearer ${localStorage.getItem("token")}`,
+  },
+});
+
+const AxiosAuth = axios.create({
+  baseURL: process.env.REACT_APP_URL + "/auth",
   headers: {
     "Content-type": "application/json",
   },
@@ -27,4 +35,4 @@ const GetParamsParse = (path: string, values?: any) => {
   }
 };
 
-export { GetParamsParse };
+export { GetParamsParse, AxiosAuth };

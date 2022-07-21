@@ -9,12 +9,12 @@ import {
 import http from "../utils/http-common";
 
 const ApiLabelsList = async () => {
-  const response = await http.get<CommonRes<LabelsListRes[]>>("/labels/list");
+  const response = await http().get<CommonRes<LabelsListRes[]>>("/labels/list");
   return response.data;
 };
 
 const ApiLabelsCreate = async (value: LabelsCreateReq) => {
-  const response = await http.post<
+  const response = await http().post<
     LabelsCreateReq,
     AxiosResponse<CommonRes<number>>
   >("/labels/create", value);
@@ -22,7 +22,7 @@ const ApiLabelsCreate = async (value: LabelsCreateReq) => {
 };
 
 const ApiLabelsEdit = async (value: LabelsEditReq) => {
-  const response = await http.post<
+  const response = await http().post<
     LabelsEditReq,
     AxiosResponse<CommonRes<null>>
   >("/labels/update", value);
@@ -30,7 +30,7 @@ const ApiLabelsEdit = async (value: LabelsEditReq) => {
 };
 
 const ApiLabelsDelete = async (value: LabelsDeleteReq) => {
-  const response = await http.post<
+  const response = await http().post<
     LabelsDeleteReq,
     AxiosResponse<CommonRes<null>>
   >("/labels/deleteL", value);

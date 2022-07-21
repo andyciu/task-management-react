@@ -1,6 +1,7 @@
 import { faAlignLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, Container, Nav, Navbar } from "react-bootstrap";
+import LoginModal from "../../components/login/LoginModal";
 
 interface IProps {
   toggle: () => void;
@@ -20,17 +21,9 @@ const NavbarCustom = (props: IProps) => {
         </Button>
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-      {/* <Navbar.Collapse
-        id="responsive-navbar-nav"
-        className="justify-content-end"
-      >
-        <Nav className="ml-auto" navbar>
-          <Nav.Link href="#">page</Nav.Link>
-          <Nav.Link href="#">page</Nav.Link>
-          <Nav.Link href="#">page</Nav.Link>
-          <Nav.Link href="#">page</Nav.Link>
-        </Nav>
-      </Navbar.Collapse> */}
+      <Navbar.Collapse className="justify-content-end">
+        <LoginModal />
+      </Navbar.Collapse>
     </Navbar>
   );
 };

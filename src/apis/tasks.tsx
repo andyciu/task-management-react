@@ -10,14 +10,14 @@ import {
 import http, { GetParamsParse } from "../utils/http-common";
 
 const ApiTasksList = async (value?: TasksListReq) => {
-  const response = await http.get<CommonRes<TasksListRes[]>>(
+  const response = await http().get<CommonRes<TasksListRes[]>>(
     GetParamsParse("/tasks/list", value)
   );
   return response.data;
 };
 
 const ApiTasksCreate = async (value: TasksCreateReq) => {
-  const response = await http.post<
+  const response = await http().post<
     TasksCreateReq,
     AxiosResponse<CommonRes<number>>
   >("/tasks/create", value);
@@ -25,7 +25,7 @@ const ApiTasksCreate = async (value: TasksCreateReq) => {
 };
 
 const ApiTasksEdit = async (value: TasksEditReq) => {
-  const response = await http.post<
+  const response = await http().post<
     TasksEditReq,
     AxiosResponse<CommonRes<null>>
   >("/tasks/update", value);
@@ -33,7 +33,7 @@ const ApiTasksEdit = async (value: TasksEditReq) => {
 };
 
 const ApiTasksDelete = async (value: TasksDeleteReq) => {
-  const response = await http.post<
+  const response = await http().post<
     TasksDeleteReq,
     AxiosResponse<CommonRes<null>>
   >("/tasks/deleteL", value);
