@@ -36,7 +36,7 @@ const TasksPage = () => {
       dataField: "id",
       text: "ID",
       sort: true,
-      style: { width: "8%" },
+      style: { width: "80px" },
       sortCaret: CustomSortCaret,
     },
     {
@@ -52,7 +52,7 @@ const TasksPage = () => {
     {
       dataField: "start_time",
       text: "StartTime",
-      style: { width: "10%" },
+      style: { width: "100px" },
       formatter: (cell, row, rowIndex) => {
         return <>{toDateString(cell)}</>;
       },
@@ -60,7 +60,7 @@ const TasksPage = () => {
     {
       dataField: "end_time",
       text: "EndTime",
-      style: { width: "10%" },
+      style: { width: "100px" },
       formatter: (cell, row, rowIndex) => {
         return <>{toDateString(cell)}</>;
       },
@@ -71,7 +71,7 @@ const TasksPage = () => {
       sort: true,
       sortCaret: CustomSortCaret,
       align: "center",
-      style: { width: "9%" },
+      style: { width: "110px" },
       formatter: (cell, row, rowIndex) => {
         let badgestr = "";
         let badgecolor = "";
@@ -111,7 +111,7 @@ const TasksPage = () => {
       sort: true,
       sortCaret: CustomSortCaret,
       align: "center",
-      style: { width: "8%" },
+      style: { width: "100px" },
       formatter: (cell, row, rowIndex) => {
         let badgestr = "";
         let badgecolor = "";
@@ -170,7 +170,7 @@ const TasksPage = () => {
     {
       dataField: "_action",
       text: "Action",
-      style: { width: "12%" },
+      style: { width: "160px" },
       align: "center",
       formatter: (cell, row, rowIndex) => {
         return (

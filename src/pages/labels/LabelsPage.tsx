@@ -43,7 +43,7 @@ const LabelsPage = () => {
       dataField: "id",
       text: "ID",
       sort: true,
-      style: { width: "5%" },
+      style: { width: "80px" },
       sortCaret: CustomSortCaret,
     },
     {
@@ -55,7 +55,7 @@ const LabelsPage = () => {
     {
       dataField: "_action",
       text: "Action",
-      style: { width: "12%" },
+      style: { width: "160px" },
       align: "center",
       formatter: (cell, row, rowIndex) => {
         return (
