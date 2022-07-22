@@ -1,7 +1,9 @@
 import { faAlignLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Button, Container, Nav, Navbar } from "react-bootstrap";
+import { Button, Navbar } from "react-bootstrap";
 import LoginModal from "../../components/login/LoginModal";
+import { NickNameText } from "../../components/login/NickNameText";
+import { useAppSelector } from "../../store/hook";
 
 interface IProps {
   toggle: () => void;
@@ -9,6 +11,8 @@ interface IProps {
 
 const NavbarCustom = (props: IProps) => {
   const { toggle } = props;
+  const isLogin = useAppSelector((state) => state.user.isLogin);
+
   return (
     <Navbar
       bg="light"
@@ -22,7 +26,7 @@ const NavbarCustom = (props: IProps) => {
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse className="justify-content-end">
-        <LoginModal />
+        {isLogin ? <NickNameText /> : <LoginModal />}
       </Navbar.Collapse>
     </Navbar>
   );

@@ -1,12 +1,14 @@
 import axios from "axios";
+import jwt_decode, { JwtPayload } from "jwt-decode";
 
-export default () => axios.create({
-  baseURL: process.env.REACT_APP_URL + "/apis",
-  headers: {
-    "Content-type": "application/json",
-    Authorization: `Bearer ${localStorage.getItem("token")}`,
-  },
-});
+export default () =>
+  axios.create({
+    baseURL: process.env.REACT_APP_URL + "/apis",
+    headers: {
+      "Content-type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
 
 const AxiosAuth = axios.create({
   baseURL: process.env.REACT_APP_URL + "/auth",
@@ -35,4 +37,23 @@ const GetParamsParse = (path: string, values?: any) => {
   }
 };
 
-export { GetParamsParse, AxiosAuth };
+const IsLogin = () => {
+  let token = localStorage.getItem("token");
+  if (!token) return false;
+
+  let decodedToken = jwt_decode<JwtPayload>(token);
+  // console.log("Decoded Token", decodedToken);
+  let currentDate = new Date();
+
+  // JWT exp is in seconds
+  if (decodedToken.exp && decodedToken.exp * 1000 >= currentDate.getTime()) {
+    // console.log("Valid token");
+    return true;
+  } else {
+    // console.log("Token expired.");
+    localStorage.removeItem("token");
+    return false;
+  }
+};
+
+export { GetParamsParse, IsLogin, AxiosAuth };

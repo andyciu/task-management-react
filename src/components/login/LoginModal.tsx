@@ -2,13 +2,17 @@ import React, { useState } from "react";
 import { Button, Form, Modal, Spinner } from "react-bootstrap";
 import { ApiAuthLogin } from "../../apis/auth";
 import { AuthLoginReq } from "../../interface/auth";
+import { useAppDispatch } from "../../store/hook";
+import { setLogin } from "../../store/user/userSlice";
 import { ResponseCode } from "../../utils/const";
+import { IsLogin } from "../../utils/http-common";
 
 interface IProp {
   onFinish?: (isLogin: boolean) => void;
 }
 
 const LoginModal = (props: IProp) => {
+  const dispatch = useAppDispatch();
   const { onFinish } = props;
   const [modalShow, setModalShow] = useState(false);
   const [isClick, setIsClick] = useState(false);
@@ -42,6 +46,7 @@ const LoginModal = (props: IProp) => {
     }
 
     setModalShow(false);
+    dispatch(setLogin(true));
     if (onFinish) {
       onFinish(isLogin);
     }
@@ -49,7 +54,16 @@ const LoginModal = (props: IProp) => {
 
   return (
     <>
-      <Button variant="secondary" onClick={() => setModalShow(true)}>
+      <Button
+        variant="secondary"
+        onClick={() => {
+          if (IsLogin()) {
+            dispatch(setLogin(true));
+          } else {
+            setModalShow(true);
+          }
+        }}
+      >
         Login
       </Button>
 
@@ -62,9 +76,7 @@ const LoginModal = (props: IProp) => {
       >
         <Form onSubmit={onSummit} noValidate validated={validated}>
           <Modal.Header closeButton>
-            <Modal.Title id="contained-modal-title-vcenter">
-              Login
-            </Modal.Title>
+            <Modal.Title id="contained-modal-title-vcenter">Login</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Form.Group className="mb-3" controlId="formBasicUsername">
