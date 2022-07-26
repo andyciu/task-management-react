@@ -30,7 +30,6 @@ const GetParamsParse = (path: string, values?: any) => {
         resultstr = resultstr.concat(key, "=", value, "&");
       }
     }
-    console.log(path + resultstr);
     return path + resultstr;
   } else {
     return path;
@@ -42,15 +41,12 @@ const IsLogin = () => {
   if (!token) return false;
 
   let decodedToken = jwt_decode<JwtPayload>(token);
-  // console.log("Decoded Token", decodedToken);
   let currentDate = new Date();
 
   // JWT exp is in seconds
   if (decodedToken.exp && decodedToken.exp * 1000 >= currentDate.getTime()) {
-    // console.log("Valid token");
     return true;
   } else {
-    // console.log("Token expired.");
     localStorage.removeItem("token");
     return false;
   }

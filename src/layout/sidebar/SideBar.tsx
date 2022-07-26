@@ -1,17 +1,10 @@
 import {
   faTimes,
-  faHome,
-  faCopy,
-  faBriefcase,
-  faImage,
-  faQuestion,
-  faPaperPlane,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames";
 import { Button, Nav } from "react-bootstrap";
 import { RouteSideBar } from "../../router/private-route";
-import SubMenu from "./SubMenu";
 
 interface IProps {
   isOpen: boolean;
@@ -35,8 +28,6 @@ const SideBar = (props: IProps) => {
       </div>
 
       <Nav className="flex-column pt-2">
-        {/* <p className="ml-3">Heading</p> */}
-
         <RouteSideBar />
       </Nav>
     </div>

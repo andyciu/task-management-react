@@ -21,7 +21,6 @@ export const labelsSlice = createSlice({
 });
 
 const InitLabelsSliceData = async (dispatch: Function) => {
-  // console.log('InitLabelsSliceData')
   const data = await ApiLabelsList();
   dispatch(writeData(data.content));
 };

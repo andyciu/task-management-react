@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { Button, Form, Offcanvas, Spinner } from "react-bootstrap";
-import { ApiLabelsCreate, ApiLabelsEdit } from "../../apis/labels";
+import { ApiLabelsEdit } from "../../apis/labels";
 import { CommonRes } from "../../interface/common";
-import { LabelsCreateReq, LabelsEditReq } from "../../interface/labels";
+import { LabelsEditReq } from "../../interface/labels";
 
 interface IProp {
   id: number;

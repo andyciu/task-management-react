@@ -1,12 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Alert,
-  Col,
   Container,
   Placeholder,
-  Row,
   Stack,
-  Table,
 } from "react-bootstrap";
 import BootstrapTable, {
   ColumnDescription,
@@ -21,6 +18,7 @@ import CustomSortCaret from "../../components/custom-sort-caret/CustomSortCaret"
 import DeleteLabel from "./DeleteLabel";
 import { useAppDispatch } from "../../store/hook";
 import { writeData } from "../../store/labels/labelsSlice";
+import { ResponseCode } from "../../utils/const";
 
 const LabelsPage = () => {
   const dispatch = useAppDispatch();
@@ -63,7 +61,7 @@ const LabelsPage = () => {
             <EditLabel
               onFinish={(result) => {
                 setShowAlert(false);
-                if (result.code == "00") {
+                if (result.code == ResponseCode.OK) {
                   setAlertVariant("success");
                   setAlertText("修改成功");
                 } else {
@@ -81,7 +79,7 @@ const LabelsPage = () => {
               id={row.id}
               onFinish={(result) => {
                 setShowAlert(false);
-                if (result.code == "00") {
+                if (result.code == ResponseCode.OK) {
                   setAlertVariant("success");
                   setAlertText("刪除成功");
                 } else {
@@ -124,7 +122,7 @@ const LabelsPage = () => {
           <CreateLabel
             onFinish={(result) => {
               setShowAlert(false);
-              if (result.code == "00") {
+              if (result.code == ResponseCode.OK) {
                 setAlertVariant("success");
                 setAlertText("新增成功");
               } else {

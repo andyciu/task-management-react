@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
-import { Button, Col, Form, Offcanvas, Spinner } from "react-bootstrap";
+import { Button, Form, Offcanvas, Spinner } from "react-bootstrap";
 import Select from "react-select";
-import AsyncSelect from "react-select/async";
-import { ApiLabelsList } from "../../apis/labels";
 import { ApiTasksCreate } from "../../apis/tasks";
 import { CommonRes } from "../../interface/common";
 import { LabelsListRes } from "../../interface/labels";
@@ -73,8 +71,6 @@ const CreateTask = (props: IProp) => {
         ? reqData.state
         : undefined;
 
-    console.log(reqData);
-    // console.log(labelsValue);
     const result = await ApiTasksCreate(reqData);
     setShow(false);
     if (onFinish) {

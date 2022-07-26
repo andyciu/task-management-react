@@ -20,7 +20,7 @@ const NickNameText = () => {
 
   return (
     <>
-      <Navbar.Text>Signed in as: {nickName}</Navbar.Text>
+      <Navbar.Text>Signed in as: {nickName}&nbsp;&nbsp;</Navbar.Text>
       <Button
         variant="secondary"
         onClick={() => {

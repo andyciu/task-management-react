@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, Col, Form, Offcanvas, Spinner } from "react-bootstrap";
+import { Button, Form, Offcanvas, Spinner } from "react-bootstrap";
 import Select from "react-select";
 import { ApiTasksEdit } from "../../apis/tasks";
 import { CommonRes } from "../../interface/common";
@@ -75,8 +75,6 @@ const EditTask = (props: IProp) => {
         ? reqData.state
         : undefined;
 
-    // console.log(reqData);
-    // console.log(labelsValue);
     const result = await ApiTasksEdit(reqData);
     setShow(false);
     if (onFinish) {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Container, Alert, Stack, Placeholder, Badge } from "react-bootstrap";
 import BootstrapTable, {
   ColumnDescription,
@@ -10,6 +10,7 @@ import CustomSortCaret from "../../components/custom-sort-caret/CustomSortCaret"
 import { TasksListRes } from "../../interface/tasks";
 import { useAppDispatch, useAppSelector } from "../../store/hook";
 import { InitLabelsSliceData } from "../../store/labels/labelsSlice";
+import { ResponseCode } from "../../utils/const";
 import { toDateString } from "../../utils/dateFormat";
 import CreateTask from "./CreateTask";
 import DeleteTask from "./DeleteTask";
@@ -178,7 +179,7 @@ const TasksPage = () => {
             <EditTask
               onFinish={(result) => {
                 setShowAlert(false);
-                if (result.code == "00") {
+                if (result.code == ResponseCode.OK) {
                   setAlertVariant("success");
                   setAlertText("修改成功");
                 } else {
@@ -196,7 +197,7 @@ const TasksPage = () => {
               id={row.id}
               onFinish={(result) => {
                 setShowAlert(false);
-                if (result.code == "00") {
+                if (result.code == ResponseCode.OK) {
                   setAlertVariant("danger");
                   setAlertText("刪除成功");
                 } else {
@@ -243,7 +244,7 @@ const TasksPage = () => {
           <CreateTask
             onFinish={(result) => {
               setShowAlert(false);
-              if (result.code == "00") {
+              if (result.code == ResponseCode.OK) {
                 setAlertVariant("success");
                 setAlertText("新增成功");
               } else {

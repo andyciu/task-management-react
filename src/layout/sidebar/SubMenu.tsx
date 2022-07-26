@@ -1,14 +1,12 @@
 import {
-  faBriefcase,
   faCaretDown,
   faCaretUp,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames";
-import React, { Children, useState } from "react";
-import { Accordion, Card, Nav, useAccordionButton } from "react-bootstrap";
+import React, { useState } from "react";
+import { Accordion, Nav, useAccordionButton } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { StringDecoder } from "string_decoder";
 import { IRoute } from "../../router/config";
 
 interface IProps {
