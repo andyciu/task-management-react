@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BrowserRouter as Router } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import Content from "./content/Content";
 import SideBar from "./sidebar/SideBar";
 import "./MainPage.css";
@@ -32,12 +32,12 @@ const MainPage = () => {
   }, []);
 
   return (
-    <Router>
+    <HashRouter>
       <div className="App wrapper">
         <SideBar toggle={toggle} isOpen={isOpen} />
         <Content toggle={toggle} isOpen={isOpen} />
       </div>
-    </Router>
+    </HashRouter>
   );
 };
 
