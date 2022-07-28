@@ -1,6 +1,10 @@
-# Getting Started with Create React App
+# Task Management (FrontEnd)
+Base On [Create React App](https://github.com/facebook/create-react-app)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Environment variables
+|Name|Description|
+|---|---|
+|REACT_APP_URL|BackEnd endpoint URL  (e.g. http://localhost:5000)|
 
 ## Available Scripts
 
