@@ -1,18 +1,13 @@
 import { faCopy } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Nav } from "react-bootstrap";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
 import SubMenu from "../layout/sidebar/SubMenu";
 import { IRoute, PublicRouteConfig } from "./config";
 
 const RouteCompoment = (props: IRoute) => {
   return (
-    <Route
-      key={props.path}
-      path={props.path}
-      exact={props.exact}
-      children={<props.component />}
-    />
+    <Route key={props.path} path={props.path} element={<props.component />} />
   );
 };
 
@@ -65,7 +60,7 @@ const RouteContent = () => {
     return elements;
   };
 
-  return <Switch>{totalCompoment()}</Switch>;
+  return <Routes>{totalCompoment()}</Routes>;
 };
 
 const RouteSideBar = () => {

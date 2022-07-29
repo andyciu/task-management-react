@@ -19,17 +19,16 @@ const PrivateRouteConfig: IRoute[] = [
   {
     text: "Home",
     path: "/",
-    exact: true,
     component: HomePage,
   },
   {
     text: "Tasks",
-    path: "/tasks",
+    path: "tasks/",
     component: TasksPage,
   },
   {
     text: "Labels",
-    path: "/labels",
+    path: "labels/",
     component: LabelsPage,
   },
 ];

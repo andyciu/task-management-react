@@ -1,3 +1,6 @@
+import { faGoogle } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
 import React, { useState } from "react";
 import { Button, Form, Modal, Spinner } from "react-bootstrap";
 import { ApiAuthLogin } from "../../apis/auth";
@@ -19,6 +22,7 @@ const LoginModal = (props: IProp) => {
   const [validated, setValidated] = useState(false);
 
   const setHide = () => setModalShow(false);
+  
 
   const onSummit = async (e: any) => {
     setIsClick(true);
@@ -52,6 +56,11 @@ const LoginModal = (props: IProp) => {
     }
   };
 
+  const googlelogin = useGoogleLogin({
+    onSuccess: codeResponse => console.log(codeResponse),
+    flow: 'auth-code',
+  });
+
   return (
     <>
       <Button
@@ -66,6 +75,8 @@ const LoginModal = (props: IProp) => {
       >
         Login
       </Button>
+
+      <FontAwesomeIcon icon={faGoogle} pull="right" size="xs"/>
 
       <Modal
         show={modalShow}
