@@ -3,4 +3,8 @@ interface AuthLoginReq {
   password: string;
 }
 
-export type { AuthLoginReq };
+interface ApiGoogleOAuthLoginReq {
+  auth_code: string;
+}
+
+export type { AuthLoginReq, ApiGoogleOAuthLoginReq };

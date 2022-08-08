@@ -1,10 +1,11 @@
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
-import React, { useState } from "react";
+import { useGoogleLogin } from "@react-oauth/google";
+import { useState } from "react";
 import { Button, Form, Modal, Spinner } from "react-bootstrap";
-import { ApiAuthLogin } from "../../apis/auth";
+import { ApiAuthLogin, ApiGoogleOAuthLogin } from "../../apis/auth";
 import { AuthLoginReq } from "../../interface/auth";
+import { CommonRes } from "../../interface/common";
 import { useAppDispatch } from "../../store/hook";
 import { setLogin } from "../../store/user/userSlice";
 import { ResponseCode } from "../../utils/const";
@@ -22,7 +23,6 @@ const LoginModal = (props: IProp) => {
   const [validated, setValidated] = useState(false);
 
   const setHide = () => setModalShow(false);
-  
 
   const onSummit = async (e: any) => {
     setIsClick(true);
@@ -42,7 +42,21 @@ const LoginModal = (props: IProp) => {
 
     const reqData = formDataObj as unknown as AuthLoginReq;
 
-    const result = await ApiAuthLogin(reqData);
+    AfterCallLoginApi(await ApiAuthLogin(reqData));
+  };
+
+  const googlelogin = useGoogleLogin({
+    onSuccess: async (codeResponse) => {
+      AfterCallLoginApi(
+        await ApiGoogleOAuthLogin({
+          auth_code: codeResponse.code,
+        })
+      );
+    },
+    flow: "auth-code",
+  });
+
+  const AfterCallLoginApi = (result: CommonRes<string>) => {
     let isLogin = false;
     if (result.code == ResponseCode.OK) {
       localStorage.setItem("token", result.content);
@@ -55,11 +69,6 @@ const LoginModal = (props: IProp) => {
       onFinish(isLogin);
     }
   };
-
-  const googlelogin = useGoogleLogin({
-    onSuccess: codeResponse => console.log(codeResponse),
-    flow: 'auth-code',
-  });
 
   return (
     <>
@@ -75,9 +84,10 @@ const LoginModal = (props: IProp) => {
       >
         Login
       </Button>
-
-      <FontAwesomeIcon icon={faGoogle} pull="right" size="xs"/>
-
+      &nbsp;&nbsp;
+      <Button variant="outline-primary" onClick={googlelogin}>
+        <FontAwesomeIcon icon={faGoogle} size="lg" />
+      </Button>
       <Modal
         show={modalShow}
         onHide={setHide}

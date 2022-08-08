@@ -1,5 +1,5 @@
 import { AxiosResponse } from "axios";
-import { AuthLoginReq } from "../interface/auth";
+import { ApiGoogleOAuthLoginReq, AuthLoginReq } from "../interface/auth";
 import { CommonRes } from "../interface/common";
 import { AxiosAuth as http } from "../utils/http-common";
 
@@ -11,4 +11,12 @@ const ApiAuthLogin = async (value: AuthLoginReq) => {
   return response.data;
 };
 
-export { ApiAuthLogin };
+const ApiGoogleOAuthLogin = async (value: ApiGoogleOAuthLoginReq) => {
+  const response = await http.post<
+    ApiGoogleOAuthLoginReq,
+    AxiosResponse<CommonRes<string>>
+  >("/googleOAuth", value);
+  return response.data;
+};
+
+export { ApiAuthLogin, ApiGoogleOAuthLogin };
