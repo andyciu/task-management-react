@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button, Navbar } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "../../store/hook";
+import { writeData } from "../../store/labels/labelsSlice";
 import {
   InitUserNickNameData,
   setLogin,
@@ -27,6 +28,7 @@ const NickNameText = () => {
           localStorage.removeItem("token");
           dispatch(setLogin(false));
           dispatch(setNickName(""));
+          dispatch(writeData([]));
         }}
       >
         LogOut

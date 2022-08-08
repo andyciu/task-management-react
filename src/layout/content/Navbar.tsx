@@ -3,13 +3,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, Navbar } from "react-bootstrap";
 import LoginModal from "../../components/login/LoginModal";
 import { NickNameText } from "../../components/login/NickNameText";
-import { useAppSelector } from "../../store/hook";
+import { useAppDispatch, useAppSelector } from "../../store/hook";
+import { writeData } from "../../store/labels/labelsSlice";
 
 interface IProps {
   toggle: () => void;
 }
 
 const NavbarCustom = (props: IProps) => {
+  const dispatch = useAppDispatch();
   const { toggle } = props;
   const isLogin = useAppSelector((state) => state.user.isLogin);
 
@@ -26,7 +28,11 @@ const NavbarCustom = (props: IProps) => {
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse className="justify-content-end">
-        {isLogin ? <NickNameText /> : <LoginModal />}
+        {isLogin ? (
+          <NickNameText />
+        ) : (
+          <LoginModal onFinish={() => dispatch(writeData([]))} />
+        )}
       </Navbar.Collapse>
     </Navbar>
   );
