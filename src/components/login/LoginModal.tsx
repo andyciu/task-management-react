@@ -19,10 +19,13 @@ const LoginModal = (props: IProp) => {
   const dispatch = useAppDispatch();
   const { onFinish } = props;
   const [modalShow, setModalShow] = useState(false);
+  const [msgmodalShow, setMsgModalShow] = useState(false);
+  const [msgmodalText, setMsgModalText] = useState("");
   const [isClick, setIsClick] = useState(false);
   const [validated, setValidated] = useState(false);
 
   const setHide = () => setModalShow(false);
+  const setMsgHide = () => setMsgModalShow(false);
 
   const onSummit = async (e: any) => {
     setIsClick(true);
@@ -58,13 +61,18 @@ const LoginModal = (props: IProp) => {
 
   const AfterCallLoginApi = (result: CommonRes<string>) => {
     let isLogin = false;
+
+    setModalShow(false);
     if (result.code == ResponseCode.OK) {
       localStorage.setItem("token", result.content);
       isLogin = true;
+
+      dispatch(setLogin(true));
+    } else if (result.code == ResponseCode.Error) {
+      setMsgModalText(result.message);
+      setMsgModalShow(true);
     }
 
-    setModalShow(false);
-    dispatch(setLogin(true));
     if (onFinish) {
       onFinish(isLogin);
     }
@@ -78,6 +86,7 @@ const LoginModal = (props: IProp) => {
           if (IsLogin()) {
             dispatch(setLogin(true));
           } else {
+            setIsClick(false);
             setModalShow(true);
           }
         }}
@@ -88,6 +97,17 @@ const LoginModal = (props: IProp) => {
       <Button variant="outline-primary" onClick={googlelogin}>
         <FontAwesomeIcon icon={faGoogle} size="lg" />
       </Button>
+      <Modal show={msgmodalShow} onHide={setMsgHide}>
+        <Modal.Header>
+          <Modal.Title>Message</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>{msgmodalText}</Modal.Body>
+        <Modal.Footer>
+          <Button variant="danger" onClick={setMsgHide}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
       <Modal
         show={modalShow}
         onHide={setHide}
