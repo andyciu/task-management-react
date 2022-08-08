@@ -1,3 +1,5 @@
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { Button, Modal, Spinner } from "react-bootstrap";
 import { ApiTasksDelete } from "../../apis/tasks";
@@ -30,8 +32,8 @@ const DeleteTask = (props: IProp) => {
 
   return (
     <>
-      <Button variant="danger" onClick={handleShow}>
-        Delete
+      <Button variant="danger" size="sm" onClick={handleShow}>
+        <FontAwesomeIcon icon={faTrash} size="sm" />
       </Button>
 
       <Modal show={show} onHide={handleClose}>

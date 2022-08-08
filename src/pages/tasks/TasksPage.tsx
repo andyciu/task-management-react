@@ -28,7 +28,9 @@ const TasksPage = () => {
   const GetTasksList = async () => {
     setLoading(true);
     const data = await ApiTasksList();
-    setDataSourse(data.content);
+    if (data.content) {
+      setDataSourse(data.content);
+    }
     setLoading(false);
   };
 
@@ -72,7 +74,7 @@ const TasksPage = () => {
       sort: true,
       sortCaret: CustomSortCaret,
       align: "center",
-      style: { width: "110px" },
+      style: { width: "120px" },
       formatter: (cell, row, rowIndex) => {
         let badgestr = "";
         let badgecolor = "";
@@ -171,7 +173,7 @@ const TasksPage = () => {
     {
       dataField: "_action",
       text: "Action",
-      style: { width: "160px" },
+      style: { width: "100px" },
       align: "center",
       formatter: (cell, row, rowIndex) => {
         return (
@@ -263,13 +265,18 @@ const TasksPage = () => {
         keyField="id"
         data={dataSourse}
         columns={columns}
-        noDataIndication={() => (
-          <Placeholder as="p" animation="glow">
-            <Placeholder xs={12} />
-            <Placeholder xs={12} />
-            <Placeholder xs={12} />
-          </Placeholder>
-        )}
+        noDataIndication={() => {
+          if (loading) {
+            return (
+              <Placeholder as="p" animation="glow">
+                <Placeholder xs={12} />
+                <Placeholder xs={12} />
+                <Placeholder xs={12} />
+              </Placeholder>
+            );
+          }
+          return <></>;
+        }}
         pagination={paginationFactory({})}
         defaultSorted={defaultSorted}
       />

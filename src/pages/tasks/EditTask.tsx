@@ -1,3 +1,5 @@
+import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import { Button, Form, Offcanvas, Spinner } from "react-bootstrap";
 import Select from "react-select";
@@ -104,13 +106,14 @@ const EditTask = (props: IProp) => {
     <>
       <Button
         variant="primary"
+        size="sm"
         onClick={() => {
           setIsClick(false);
           setValidated(false);
           setShow(true);
         }}
       >
-        Edit
+        <FontAwesomeIcon icon={faPenToSquare} size="sm" />
       </Button>
 
       <Offcanvas show={show} onHide={() => setShow(false)} placement="end">

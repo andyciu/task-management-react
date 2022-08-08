@@ -1,10 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  Alert,
-  Container,
-  Placeholder,
-  Stack,
-} from "react-bootstrap";
+import { Alert, Container, Placeholder, Stack } from "react-bootstrap";
 import BootstrapTable, {
   ColumnDescription,
   SortOrder,
@@ -31,8 +26,11 @@ const LabelsPage = () => {
   const GetLabelsList = async () => {
     setLoading(true);
     const data = await ApiLabelsList();
-    setDataSourse(data.content);
-    dispatch(writeData(data.content));
+    if (data.content) {
+      setDataSourse(data.content);
+      dispatch(writeData(data.content));
+    }
+
     setLoading(false);
   };
 
@@ -53,7 +51,7 @@ const LabelsPage = () => {
     {
       dataField: "_action",
       text: "Action",
-      style: { width: "160px" },
+      style: { width: "100px" },
       align: "center",
       formatter: (cell, row, rowIndex) => {
         return (
@@ -141,13 +139,18 @@ const LabelsPage = () => {
         keyField="id"
         data={dataSourse}
         columns={columns}
-        noDataIndication={() => (
-          <Placeholder as="p" animation="glow">
-            <Placeholder xs={12} />
-            <Placeholder xs={12} />
-            <Placeholder xs={12} />
-          </Placeholder>
-        )}
+        noDataIndication={() => {
+          if (loading) {
+            return (
+              <Placeholder as="p" animation="glow">
+                <Placeholder xs={12} />
+                <Placeholder xs={12} />
+                <Placeholder xs={12} />
+              </Placeholder>
+            );
+          }
+          return <></>;
+        }}
         pagination={paginationFactory({})}
         defaultSorted={defaultSorted}
       />

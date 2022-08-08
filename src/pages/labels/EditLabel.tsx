@@ -3,6 +3,8 @@ import { Button, Form, Offcanvas, Spinner } from "react-bootstrap";
 import { ApiLabelsEdit } from "../../apis/labels";
 import { CommonRes } from "../../interface/common";
 import { LabelsEditReq } from "../../interface/labels";
+import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface IProp {
   id: number;
@@ -48,13 +50,14 @@ const EditLabel = (props: IProp) => {
     <>
       <Button
         variant="primary"
+        size="sm"
         onClick={() => {
           setIsClick(false);
           setValidated(false);
           setShow(true);
         }}
       >
-        Edit
+        <FontAwesomeIcon icon={faPenToSquare} size="sm" />
       </Button>
 
       <Offcanvas show={show} onHide={() => setShow(false)} placement="end">
