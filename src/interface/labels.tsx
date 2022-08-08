@@ -13,6 +13,7 @@ interface LabelsDeleteReq {
 
 interface LabelsListRes {
   id: number;
+  num: number;
   name: string;
 }
 

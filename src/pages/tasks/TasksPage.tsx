@@ -36,8 +36,8 @@ const TasksPage = () => {
 
   const columns: ColumnDescription[] = [
     {
-      dataField: "id",
-      text: "ID",
+      dataField: "num",
+      text: "No.",
       sort: true,
       style: { width: "80px" },
       sortCaret: CustomSortCaret,

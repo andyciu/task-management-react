@@ -31,6 +31,7 @@ interface TasksDeleteReq {
 
 interface TasksListRes {
   id: number;
+  num: number;
   title: string;
   description?: string;
   start_time?: string;
